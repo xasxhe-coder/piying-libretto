@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "name": "唐山皮影·七字句",
+    "description": "以七字上下句为基本单位，下句押韵，段内不换辙。仅校验可从文本直接判定的项目。",
+    "confidence": "inferred",
+    "source": "唱词格律名称见河北省文化和旅游厅「唐山皮影戏」项目页（七字句/十字锦/三赶七/五字赋/硬散/大金边/小金边）；‘七字句=每句七字’系据名称推定",
+    "warning": "板式与腔格的字数、句式细则未见于公开资料；平仄定式未开启。本规则只保证「字数、押韵、上下句配对、重复」四项，不代表对唐山皮影格律的完整还原。"
+  },
+  "structure": {
+    "line_chars": { "min": 7, "max": 7 },
+    "clause_chars": null,
+    "couplet_required": true,
+    "min_lines_per_stanza": 2,
+    "max_lines_per_stanza": 16,
+    "max_chars_per_line": 40
+  },
+  "rhyme": {
+    "enabled": true,
+    "on": "lower",
+    "strict": true,
+    "change_allowed_per_stanza": true,
+    "ban_same_char": true,
+    "unknown": "warn"
+  },
+  "tone": {
+    "enabled": false,
+    "pattern": null,
+    "patterns": null,
+    "strictness": "warn",
+    "free_rhyme_position": true
+  },
+  "repeat": {
+    "max_identical_lines": 1,
+    "max_identical_clauses": 2,
+    "max_same_rhyme_char_consecutive": 1
+  },
+  "punctuation": {
+    "require_end": true,
+    "allowed_end": "，。；！？,.;!?"
+  },
+  "overrides": {}
+}

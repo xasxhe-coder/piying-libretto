@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "name": "唐山皮影·十字锦",
+    "description": "以十字上下句为基本单位，下句押韵。",
+    "confidence": "inferred",
+    "source": "格律名称见河北省文化和旅游厅「唐山皮影戏」项目页；‘十字锦=每句十字’系据名称推定",
+    "warning": "十字锦的具体句式（是否在句中分逗、逗位在何处）未见于公开资料。若实际是三三四或三四三结构，请改用 clause_chars 配置，勿直接套用本规则。"
+  },
+  "structure": {
+    "line_chars": { "min": 10, "max": 10 },
+    "clause_chars": null,
+    "couplet_required": true,
+    "min_lines_per_stanza": 2,
+    "max_lines_per_stanza": 16,
+    "max_chars_per_line": 50
+  },
+  "rhyme": {
+    "enabled": true,
+    "on": "lower",
+    "strict": true,
+    "change_allowed_per_stanza": true,
+    "ban_same_char": true,
+    "unknown": "warn"
+  },
+  "tone": {
+    "enabled": false,
+    "strictness": "warn",
+    "free_rhyme_position": true
+  },
+  "repeat": {
+    "max_identical_lines": 1,
+    "max_identical_clauses": 2
+  },
+  "punctuation": {
+    "require_end": true,
+    "allowed_end": "，。；！？,.;!?"
+  },
+  "overrides": {}
+}

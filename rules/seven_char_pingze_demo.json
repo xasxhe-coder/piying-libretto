@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "name": "七字句 + 平仄定式（示例）",
+    "description": "演示平仄校验能力的示例规则：七字上下句，上句用「平平仄仄平平仄」，下句用「仄仄平平仄仄平」，下句押韵。",
+    "confidence": "custom",
+    "source": "平仄定式取自近体诗七言常用式，仅作功能演示",
+    "warning": "这是一份【示例规则】，不是唐山皮影的史料记载。真实使用前必须由传承人或研究者确认该流派的平仄定式，再替换 tone.patterns。"
+  },
+  "structure": {
+    "line_chars": { "min": 7, "max": 7 },
+    "clause_chars": null,
+    "couplet_required": true,
+    "min_lines_per_stanza": 2,
+    "max_lines_per_stanza": 16,
+    "max_chars_per_line": 40
+  },
+  "rhyme": {
+    "enabled": true,
+    "on": "lower",
+    "strict": true,
+    "change_allowed_per_stanza": true,
+    "ban_same_char": true,
+    "unknown": "warn"
+  },
+  "tone": {
+    "enabled": true,
+    "pattern": null,
+    "patterns": {
+      "upper": "平平仄仄平平仄",
+      "lower": "仄仄平平仄仄平"
+    },
+    "strictness": "warn",
+    "free_rhyme_position": true
+  },
+  "repeat": {
+    "max_identical_lines": 1,
+    "max_identical_clauses": 2
+  },
+  "punctuation": {
+    "require_end": false,
+    "allowed_end": "，。；！？,.;!?"
+  },
+  "overrides": {}
+}

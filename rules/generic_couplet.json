@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "name": "通用上下句（不限字数）",
+    "description": "只校验韵文骨架：上下句成对、下句押韵、段内不换辙、无重复。不限定每句字数，适合格律尚未考定的流派先做结构体检。",
+    "confidence": "custom",
+    "source": "本规则为本工具的安全默认值，不对应任何具体流派",
+    "warning": "不检查字数与平仄。若要判断某流派是否合规，请改用该流派的专用规则。"
+  },
+  "structure": {
+    "line_chars": { "min": null, "max": null },
+    "clause_chars": null,
+    "couplet_required": true,
+    "min_lines_per_stanza": 2,
+    "max_lines_per_stanza": 40,
+    "max_chars_per_line": 60
+  },
+  "rhyme": {
+    "enabled": true,
+    "on": "lower",
+    "strict": true,
+    "change_allowed_per_stanza": true,
+    "ban_same_char": true,
+    "unknown": "warn"
+  },
+  "tone": {
+    "enabled": false,
+    "strictness": "warn",
+    "free_rhyme_position": true
+  },
+  "repeat": {
+    "max_identical_lines": 1,
+    "max_identical_clauses": 2
+  },
+  "punctuation": {
+    "require_end": false,
+    "allowed_end": "，。；！？,.;!?"
+  },
+  "overrides": {}
+}

@@ -1,0 +1,342 @@
+{
+  "meta": {
+    "name": "唱词格律校验器·验收用例",
+    "version": "1.0",
+    "note": "每例声明期望的 passed 与必然出现/不得出现的问题码。run_evals.py 会逐条比对。"
+  },
+  "cases": [
+    {
+      "id": "C01",
+      "name": "七字句·合格",
+      "preset": "tangshan_qizi",
+      "text": "一年春尽一年春，\n花开花谢又逢春。\n光阴似箭催人老，\n日月如梭不待人。",
+      "expect_pass": true,
+      "expect_codes": [],
+      "forbid_codes": [
+        "E_CHAR_COUNT",
+        "E_RHYME_MISMATCH",
+        "E_COUPLET_ODD"
+      ]
+    },
+    {
+      "id": "C02",
+      "name": "七字句·多一字",
+      "preset": "tangshan_qizi",
+      "text": "一年春尽一年春光，\n花开花谢又逢春。\n光阴似箭催人老，\n日月如梭不待人。",
+      "expect_pass": false,
+      "expect_codes": [
+        "E_CHAR_COUNT"
+      ]
+    },
+    {
+      "id": "C03",
+      "name": "七字句·少一字",
+      "preset": "tangshan_qizi",
+      "text": "一年春尽一年，\n花开花谢又逢春。\n光阴似箭催人老，\n日月如梭不待人。",
+      "expect_pass": false,
+      "expect_codes": [
+        "E_CHAR_COUNT"
+      ]
+    },
+    {
+      "id": "C04",
+      "name": "上下句·奇数句",
+      "preset": "tangshan_qizi",
+      "text": "一年春尽一年春，\n花开花谢又逢春。\n光阴似箭催人老，",
+      "expect_pass": false,
+      "expect_codes": [
+        "E_COUPLET_ODD"
+      ]
+    },
+    {
+      "id": "C05",
+      "name": "押韵·段内换辙",
+      "preset": "tangshan_qizi",
+      "text": "一年春尽一年春，\n花开花谢又逢年。\n光阴似箭催人老，\n日月如梭不待人。",
+      "expect_pass": false,
+      "expect_codes": [
+        "E_RHYME_MISMATCH"
+      ]
+    },
+    {
+      "id": "C06",
+      "name": "韵脚·同字相押",
+      "preset": "tangshan_qizi",
+      "text": "一年春尽一年春，\n花开花谢又逢春。\n光阴似箭催人老，\n日月如梭又是春。",
+      "expect_pass": true,
+      "expect_codes": [
+        "W_RHYME_SAME_CHAR"
+      ]
+    },
+    {
+      "id": "C07",
+      "name": "重复·整句重复",
+      "preset": "tangshan_qizi",
+      "text": "一年春尽一年春，\n花开花谢又逢春。\n一年春尽一年春，\n日月如梭不待人。",
+      "expect_pass": true,
+      "expect_codes": [
+        "W_REPEAT_LINE"
+      ]
+    },
+    {
+      "id": "C08",
+      "name": "标点·句末缺标点",
+      "preset": "tangshan_qizi",
+      "text": "一年春尽一年春\n花开花谢又逢春\n光阴似箭催人老\n日月如梭不待人",
+      "expect_pass": true,
+      "expect_codes": [
+        "W_NO_END_PUNCT"
+      ]
+    },
+    {
+      "id": "C09",
+      "name": "分段·两段同辙",
+      "preset": "tangshan_qizi",
+      "text": "一年春尽一年春，\n花开花谢又逢春。\n光阴似箭催人老，\n日月如梭不待人。\n\n春去秋来人不觉，\n镜中白发已如银。\n莫待花残方恨晚，\n且将心事付弦琴。",
+      "expect_pass": true,
+      "expect_codes": []
+    },
+    {
+      "id": "C10",
+      "name": "分段·禁止段间换辙",
+      "rules": {
+        "structure": {
+          "line_chars": {
+            "min": null,
+            "max": null
+          }
+        },
+        "rhyme": {
+          "enabled": true,
+          "on": "lower",
+          "change_allowed_per_stanza": false
+        }
+      },
+      "text": "一年春尽一年春，\n花开花谢又逢春。\n\n天边明月照高楼，\n江水东流不复回。",
+      "expect_pass": false,
+      "expect_codes": [
+        "E_RHYME_SCHEME_CHANGE"
+      ]
+    },
+    {
+      "id": "C11",
+      "name": "边界·空输入",
+      "preset": "tangshan_qizi",
+      "text": "",
+      "expect_pass": false,
+      "expect_codes": [
+        "E_EMPTY_INPUT"
+      ]
+    },
+    {
+      "id": "C12",
+      "name": "边界·只有标点",
+      "preset": "tangshan_qizi",
+      "text": "，。；！？\n\n。。。",
+      "expect_pass": false,
+      "expect_codes": [
+        "E_NO_CJK"
+      ]
+    },
+    {
+      "id": "C13",
+      "name": "边界·非中文",
+      "preset": "tangshan_qizi",
+      "text": "Hello world\nnot lyrics at all",
+      "expect_pass": false,
+      "expect_codes": [
+        "E_NO_CJK"
+      ]
+    },
+    {
+      "id": "C14",
+      "name": "边界·规则不存在",
+      "preset": "no_such_rule",
+      "text": "一年春尽一年春，\n花开花谢又逢春。",
+      "expect_pass": false,
+      "expect_codes": [
+        "E_RULE_NOT_FOUND"
+      ]
+    },
+    {
+      "id": "C15",
+      "name": "边界·规则自相矛盾",
+      "rules": {
+        "structure": {
+          "line_chars": {
+            "min": 9,
+            "max": 5
+          }
+        }
+      },
+      "text": "一年春尽一年春，\n花开花谢又逢春。",
+      "expect_pass": false,
+      "expect_codes": [
+        "RULE_CHAR_RANGE"
+      ]
+    },
+    {
+      "id": "C16",
+      "name": "平仄·示例定式命中",
+      "preset": "seven_char_pingze_demo",
+      "text": "一年春尽一年春，\n花开花谢又逢春。\n光阴似箭催人老，\n日月如梭不待人。",
+      "expect_pass": true,
+      "expect_codes": [
+        "TONE_MISMATCH"
+      ]
+    },
+    {
+      "id": "C17",
+      "name": "平仄·全中位不校验",
+      "rules": {
+        "structure": {
+          "line_chars": {
+            "min": null,
+            "max": null
+          }
+        },
+        "rhyme": {
+          "enabled": false
+        },
+        "tone": {
+          "enabled": true,
+          "pattern": "中中中中中中中"
+        }
+      },
+      "text": "一年春尽一年春，\n花开花谢又逢春。",
+      "expect_pass": true,
+      "forbid_codes": [
+        "TONE_MISMATCH"
+      ]
+    },
+    {
+      "id": "C18",
+      "name": "分句·三字加四字合格",
+      "rules": {
+        "structure": {
+          "line_chars": {
+            "min": null,
+            "max": null
+          },
+          "clause_chars": [
+            3,
+            4
+          ],
+          "min_lines_per_stanza": 1,
+          "couplet_required": false
+        },
+        "rhyme": {
+          "enabled": false
+        }
+      },
+      "text": "一年春，尽一年春。",
+      "expect_pass": true,
+      "forbid_codes": [
+        "E_CLAUSE_CHARS"
+      ]
+    },
+    {
+      "id": "C19",
+      "name": "分句·逗位错误",
+      "rules": {
+        "structure": {
+          "line_chars": {
+            "min": null,
+            "max": null
+          },
+          "clause_chars": [
+            3,
+            4
+          ],
+          "min_lines_per_stanza": 1,
+          "couplet_required": false
+        },
+        "rhyme": {
+          "enabled": false
+        }
+      },
+      "text": "一年，春尽一年春。",
+      "expect_pass": false,
+      "expect_codes": [
+        "E_CLAUSE_CHARS"
+      ]
+    },
+    {
+      "id": "C20",
+      "name": "十字锦·合格",
+      "preset": "tangshan_shizi",
+      "text": "一年春尽又是一年逢春，\n花开花谢又逢一年归人。",
+      "expect_pass": true,
+      "forbid_codes": [
+        "E_CHAR_COUNT"
+      ]
+    },
+    {
+      "id": "C21",
+      "name": "十字锦·少两字",
+      "preset": "tangshan_shizi",
+      "text": "一年春尽一年逢春，\n花开花谢又逢一年归人。",
+      "expect_pass": false,
+      "expect_codes": [
+        "E_CHAR_COUNT"
+      ]
+    },
+    {
+      "id": "C22",
+      "name": "多音字·用 overrides 修正韵部",
+      "rules": {
+        "structure": {
+          "line_chars": {
+            "min": 7,
+            "max": 7
+          }
+        },
+        "rhyme": {
+          "enabled": true,
+          "on": "lower"
+        },
+        "overrides": {
+          "年": "人辰|2"
+        }
+      },
+      "text": "一年春尽一年春，\n花开花谢又逢年。\n光阴似箭催人老，\n日月如梭不待人。",
+      "expect_pass": true,
+      "forbid_codes": [
+        "E_RHYME_MISMATCH"
+      ]
+    },
+    {
+      "id": "C23",
+      "name": "边界·超长单行",
+      "rules": {
+        "structure": {
+          "line_chars": {
+            "min": null,
+            "max": null
+          },
+          "max_chars_per_line": 20,
+          "couplet_required": false,
+          "min_lines_per_stanza": 1
+        },
+        "rhyme": {
+          "enabled": false
+        }
+      },
+      "text": "一二三四五六七八九十一二三四五六七八九十一二三四五",
+      "expect_pass": true,
+      "expect_codes": [
+        "W_LONG_LINE"
+      ]
+    },
+    {
+      "id": "C24",
+      "name": "边界·夹带英文不计字数",
+      "preset": "tangshan_qizi",
+      "text": "一年春尽ABC春，\n花开花谢又逢春。",
+      "expect_pass": false,
+      "expect_codes": [
+        "E_CHAR_COUNT"
+      ]
+    }
+  ]
+}
