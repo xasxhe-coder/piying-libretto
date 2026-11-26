@@ -208,4 +208,4 @@ CI 在 Python 3.9 / 3.10 / 3.11 / 3.12 上跑同一套检查（`.github/workflow
 
 ## 许可
 
-代码 MIT。`data/rhyme_table.json` 由 [pypinyin](https://github.com/mozillazg/python-pinyin)（MIT）生成，辙名采用十三辙通行分法。
+代码 MIT。`data/rhyme_table.json` 由 [pypinyin](https://github.com/mozillazg/python-pinyin)（MIT）生成，辙名采用十三辙通行分法。第三方声明见 [NOTICE.md](NOTICE.md)。
